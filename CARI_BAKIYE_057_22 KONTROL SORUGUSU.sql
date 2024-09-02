@@ -1,0 +1,11 @@
+DECLARE @code VARCHAR(100) ='120.0050531303'
+DECLARE @IlkTarih datetime = '20220101'
+DECLARE @SonTarih datetime = '20220630'
+
+SELECT SATIRNO,CARIKODU,CARIADI,CLIENTREF,cast(TARIH as datetime) as TARIH,ACIKLAMA,TRCODE,BELGENO,BORC,ALACAK,BAKIYE 
+FROM dbo.[CARI_BAKIYE_057_22](@code,cast(@IlkTarih as datetime),cast(@SonTarih as datetime)) 
+
+SET DATEFORMAT DMY
+go
+select * from dbo.[CARI_BAKIYE_057_22]('120.0050531303', '20220101' , '20220630')
+ 

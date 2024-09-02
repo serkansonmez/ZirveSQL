@@ -1,0 +1,9 @@
+SELECT TBL.BAKIYE,     * FROM 
+  (SELECT  CRK AS   CARIKODU,CAST(  abs( ROUND(Round(SUM(TUTARB),6) -  Round(SUM(TUTARA),6),2))   AS VARCHAR(20)) +  ' (' +
+CASE WHEN  ROUND(Round(SUM(TUTARB),6) -  Round(SUM(TUTARA),6),2)>0 THEN 'B' WHEN  ROUND(Round(SUM(TUTARB),6) -  Round(SUM(TUTARA),6),2)< 0 THEN 'A' ELSE ' ' END + ')'  AS BAKIYE   
+  FROM CARIT_ISLEM_TUTAR()  
+   left join CARIGEN on CARIP_ID=P_ID  where CRK is not null 
+GROUP BY CRK 
+) TBL 
+
+left join [LISTEFATURA]() t1  ON TBL.CARIKODU = t1.GMHK
